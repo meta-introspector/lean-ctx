@@ -1,0 +1,26 @@
+# lean-ctx addon manifest — shmem
+# Install locally:  lean-ctx addon add examples/shmem-addon/lean-ctx-addon.toml
+# Requires the `shmem-mcp` binary on PATH and a running shmem server (see README.md).
+
+[addon]
+name = "shmem"
+display_name = "CAR Shmem Store"
+description = "Read-only access to the ipld-car-ipc-shmem ring buffer: stats, CAR page search/list, Letta memory-block query and search."
+version = "0.1.0"
+author = "meta-introspector"
+homepage = "https://github.com/meta-introspector/ipld-car-ipc-shmem-linux"
+license = "Apache-2.0"
+categories = ["data", "workflow"]
+keywords = ["ipld", "car", "shmem", "cid"]
+
+[mcp]
+transport = "stdio"
+command = "shmem-mcp"
+args = []
+# env = { IPLD_CAR_SOCKET_NAME = "@ipld_car_shmem" }
+
+[capabilities]
+network = "none"           # unix-socket client to the local server only
+filesystem = "read_only"   # read-only tool surface; no writes
+env = ["IPLD_CAR_SOCKET_NAME"]
+exec = "none"
