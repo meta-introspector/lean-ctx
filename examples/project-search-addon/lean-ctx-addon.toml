@@ -1,0 +1,26 @@
+# lean-ctx addon manifest — project-search
+# Install locally:  lean-ctx addon add examples/project-search-addon/lean-ctx-addon.toml
+# Requires the `project-search-mcp` binary on PATH (see README.md).
+
+[addon]
+name = "project-search"
+display_name = "Project Search"
+description = "Host-wide tantivy index over all local projects with project-scoped and fan-out search."
+version = "0.1.0"
+author = "meta-introspector"
+homepage = "https://github.com/meta-introspector/ipld-car-ipc-shmem-linux"
+license = "Apache-2.0"
+categories = ["search", "workflow"]
+keywords = ["tantivy", "code-search", "index"]
+
+[mcp]
+transport = "stdio"
+command = "project-search-mcp"
+args = []
+# env = { PROJECT_SEARCH_CACHE = "/mnt/data1/dasl-cache/projects" }
+
+[capabilities]
+network = "none"
+filesystem = "read_write"   # maintains per-project tantivy indexes + registry under the cache root
+env = ["PROJECT_SEARCH_CACHE"]
+exec = "none"
